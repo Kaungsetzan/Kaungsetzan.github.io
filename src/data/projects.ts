@@ -138,12 +138,12 @@ export const projects: Project[] = [
           heading: "Mobile app — iOS and Android, React Native and Expo",
           device: "phone",
           shots: [
-            { file: "login", caption: "Login", width: 720, height: 1558 },
+            { file: "login", caption: "Login", width: 720, height: 1565 },
             { file: "home-catalog", caption: "Home · catalogue", width: 720, height: 1565 },
-            { file: "product-detail", caption: "Product detail", width: 720, height: 1558 },
-            { file: "cart-pin-checkout", caption: "Cart · PIN checkout", width: 720, height: 1558 },
-            { file: "orders", caption: "Orders", width: 720, height: 1558 },
-            { file: "order-detail", caption: "Order detail", width: 720, height: 1558 },
+            { file: "product-detail", caption: "Product detail", width: 720, height: 1565 },
+            { file: "cart-pin-checkout", caption: "Cart · PIN checkout", width: 720, height: 1565 },
+            { file: "orders", caption: "Orders", width: 720, height: 1565 },
+            { file: "order-detail", caption: "Order detail", width: 720, height: 1565 },
           ],
         },
         {

@@ -5,8 +5,8 @@ import { ProjectCard } from "./ProjectCard";
 
 const FEATURED_SHOTS = [
   { file: "home-catalog", alt: "5A Goldsmith app: product catalogue", h: 652 },
-  { file: "product-detail", alt: "5A Goldsmith app: product detail", h: 649 },
-  { file: "cart-pin-checkout", alt: "5A Goldsmith app: cart and PIN checkout", h: 649 },
+  { file: "product-detail", alt: "5A Goldsmith app: product detail", h: 652 },
+  { file: "cart-pin-checkout", alt: "5A Goldsmith app: cart and PIN checkout", h: 652 },
 ];
 
 export function SelectedWork() {
