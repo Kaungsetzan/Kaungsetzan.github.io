@@ -50,9 +50,11 @@ export interface CaseStudy {
   architecture?: { heading: string; tiers: ArchTier[]; frame?: { label: string; from: number; to: number }; notes?: string[] };
   decisions: { heading: string; items: { title: string; body: string }[] };
   /** extra numbered lists, e.g. "Release and operations" or "Next steps" */
-  lists?: { kind: string; heading: string; items: string[] }[];
+  lists?: { kind: string; heading: string; items: string[]; /** show right after the screenshots instead of after the decisions */ early?: boolean }[];
   results?: { value: string; label: string }[];
   stack: { group: string; items: string[] }[];
+  /** sections still waiting for content: rendered as marked "to come" boxes */
+  pending?: { at: "context" | "results"; heading: string; note: string }[];
   /** visible TODO note for the reader of the code and for Liang */
   todo?: string;
 }
@@ -254,15 +256,107 @@ export const projects: Project[] = [
     cardLine: "Club management system for my university's student ambassadors, with voting, approvals and role-based access.",
     oneLiner:
       "A management system for my university's student ambassador club, with pages and actions limited by role.",
-    tags: ["Next.js 15", "TypeScript", "Tailwind CSS", "Strapi 5"],
+    tags: ["Next.js 16", "TypeScript", "Tailwind CSS", "Strapi 5"],
     callouts: [
       { label: "ROLES", value: "Student · Ambassador" },
       { label: "ACCESS", value: "Pages and actions limited by role" },
-      { label: "FLOWS", value: "Vote and approve workflows" },
+      { label: "FLOWS", value: "Propose → vote → approve" },
       { label: "AUTH", value: "JWT in httpOnly cookies" },
-      { label: "STACK", value: "Next.js 15 · Strapi 5" },
+      { label: "STACK", value: "Next.js 16 · Strapi 5" },
     ],
     repo: "https://github.com/Kaungsetzan/srh-clubs",
+    caseStudy: {
+      facts: [
+        { label: "WHAT", value: "Web app for a university's student ambassador club" },
+        { label: "ROLES", value: "Student · Ambassador" },
+        { label: "MY ROLE", value: "[ to be confirmed ]" },
+        { label: "TIMELINE", value: "[ to be confirmed ]" },
+        { label: "SOURCE", value: "Public repository on GitHub" },
+      ],
+      overview: {
+        heading: "Students propose clubs, ambassadors decide",
+        paragraphs: [
+          "A university web app where students propose and vote on clubs, and SRH ambassadors approve them. It also shows university events, news and projects.",
+          "It's two separate apps: a Next.js frontend and a Strapi 5 headless CMS as the backend. The frontend talks to Strapi through its REST API.",
+        ],
+      },
+      galleries: [
+        {
+          heading: "Screens",
+          device: "browser",
+          shots: [
+            { caption: "Clubs list", placeholder: true },
+            { caption: "Club detail with votes", placeholder: true },
+          ],
+        },
+      ],
+      architecture: {
+        heading: "Next.js frontend, Strapi backend",
+        tiers: [
+          { label: "BROWSER", nodes: [{ title: "Students and ambassadors", lines: ["Pages and buttons shown by role"] }], link: "pages and Server Actions" },
+          {
+            label: "FRONTEND",
+            nodes: [
+              { title: "Next.js 16 · App Router", lines: ["TypeScript · Tailwind CSS", "Server Actions for login and mutations", "Proxy redirects guests from protected pages"] },
+            ],
+            link: "REST with the user's JWT (Bearer)",
+          },
+          {
+            label: "BACKEND",
+            nodes: [
+              { title: "Strapi 5", lines: ["Clubs · votes · events · news · projects", "Custom vote, approve, reject routes"] },
+              { title: "Users & permissions", lines: ["Roles: Student, Ambassador"] },
+            ],
+            link: "",
+          },
+          { label: "DATABASE", nodes: [{ title: "SQLite", lines: ["Development database"] }] },
+        ],
+      },
+      lists: [
+        {
+          kind: "PROCESS",
+          heading: "Club lifecycle",
+          early: true,
+          items: [
+            "A logged-in student proposes a club (name, description, contact email, member limit)",
+            "Other students vote — one vote per student per club",
+            "At 10 votes the club becomes eligible",
+            "An ambassador approves it, or rejects it with a reason",
+          ],
+        },
+      ],
+      decisions: {
+        heading: "Rules live on the server",
+        items: [
+          {
+            title: "JWT in an httpOnly cookie",
+            body: "Login runs through Next.js Server Actions, which store the JWT in an httpOnly, SameSite=Lax cookie (Secure in production, one week). The token never sits in localStorage or reaches client-side JavaScript.",
+          },
+          {
+            title: "Roles checked by the API, not just the UI",
+            body: "The UI only shows approve and reject buttons to ambassadors, but Strapi checks the role again on every approve or reject request and answers 403 to anyone else.",
+          },
+          {
+            title: "Vote rules enforced in the backend",
+            body: "Each student can vote once per club, and the API refuses to approve a club below the 10-vote threshold — whatever the frontend sends.",
+          },
+          {
+            title: "Final, explained decisions",
+            body: "A rejection needs a reason, and a club that has been approved or rejected can't be decided again.",
+          },
+        ],
+      },
+      stack: [
+        { group: "Frontend", items: ["Next.js 16 (App Router)", "React 19", "TypeScript", "Tailwind CSS", "Server Actions"] },
+        { group: "Backend", items: ["Strapi 5", "Node.js", "REST API", "SQLite (dev)"] },
+        { group: "Auth", items: ["JWT", "httpOnly cookies", "Role-based access"] },
+      ],
+      pending: [
+        { at: "context", heading: "Problem and context", note: "What the club needed before this app, and who uses it" },
+        { at: "results", heading: "Results", note: "Usage, feedback or what changed for the club" },
+      ],
+      todo: "My role, timeline, problem/context, results and screenshots still to come.",
+    },
   },
   {
     slug: "safehaven",
@@ -280,6 +374,109 @@ export const projects: Project[] = [
       { label: "UI", value: "React + TypeScript admin panel" },
     ],
     repo: "https://github.com/Kaungsetzan/safe-heaven",
+    caseStudy: {
+      facts: [
+        { label: "CONTEXT", value: "Technical assessment for a full-stack internship at Webellian" },
+        { label: "RESULT", value: "Rated positively" },
+        { label: "ROLE", value: "Solo — backend and frontend" },
+        { label: "STACK", value: "Java 21 · Spring Boot 4.1 · React 19" },
+        { label: "SOURCE", value: "Public repository on GitHub" },
+      ],
+      overview: {
+        heading: "An admin panel for insurance products and their covers",
+        paragraphs: [
+          "SafeHaven is an insurance product management app: a Spring Boot REST API backed by an H2 database, with a React and TypeScript frontend for browsing and managing insurance products and the covers inside them.",
+          "I built it as the technical assessment for a full-stack internship at Webellian, as two separate projects — backend first, then frontend. It was rated positively.",
+          "The API has full CRUD for products and their nested covers, input validation with clear error responses, and 45 automated tests across controllers, services and integration.",
+        ],
+      },
+      galleries: [
+        {
+          heading: "Admin panel — React, TypeScript and Bootstrap",
+          device: "browser",
+          shots: [
+            { file: "product-list", caption: "Products", width: 1600, height: 1000 },
+            { file: "product-detail", caption: "Product detail with its covers", width: 1600, height: 1000 },
+            { file: "edit-product-modal", caption: "Edit product — modal keeps covers in view", width: 1600, height: 1000 },
+            { file: "add-cover-modal", caption: "Add a cover", width: 1600, height: 1000 },
+            { file: "create-product", caption: "New product — same form as edit", width: 1600, height: 1000 },
+          ],
+        },
+      ],
+      architecture: {
+        heading: "Three layers behind a REST API",
+        frame: { label: "SPRING BOOT API", from: 1, to: 3 },
+        tiers: [
+          {
+            label: "FRONTEND",
+            nodes: [{ title: "React admin panel", lines: ["React 19 · TypeScript · React Router 7", "axios · Bootstrap 5 · Vite"] }],
+            link: "REST · /api/products/{id}/covers/{coverId}",
+          },
+          {
+            label: "CONTROLLER",
+            nodes: [{ title: "InsuranceProduct · Cover controllers", lines: ["Bean Validation → 400 with field errors", "Not found → 404"] }],
+            link: "",
+          },
+          {
+            label: "SERVICE",
+            nodes: [{ title: "Service interfaces + implementations", lines: ["Business rules, e.g. a cover must belong to its product"] }],
+            link: "",
+          },
+          {
+            label: "REPOSITORY",
+            nodes: [{ title: "Spring Data JPA", lines: ["@EntityGraph fetches products with their covers"] }],
+            link: "",
+          },
+          { label: "DATABASE", nodes: [{ title: "H2 in-memory", lines: ["Seeded with sample products and covers"] }] },
+        ],
+      },
+      decisions: {
+        heading: "Found, fixed and designed",
+        items: [
+          {
+            title: "Fixed an IDOR-style bug",
+            body: "Editing or deleting a cover didn't check that the cover belonged to the product in the URL, so a request through one product could change another product's cover. Now the service verifies ownership first and answers 404 if it doesn't match.",
+          },
+          {
+            title: "Fixed an N+1 query",
+            body: "The product list loaded each product's covers with a separate query. An @EntityGraph on the repository now fetches products and their covers together.",
+          },
+          {
+            title: "Nested REST resources",
+            body: "Covers live under their product — /api/products/{id}/covers/{coverId} — so the URLs mirror the data model.",
+          },
+          {
+            title: "Types as Java enums",
+            body: "Product and cover types are real Java enums rather than free strings, so invalid values can't reach the database.",
+          },
+          {
+            title: "Edit in a modal, one shared form",
+            body: "Product edits open in a modal on the detail page so the covers stay visible while you edit. Create and edit share one form component.",
+          },
+        ],
+      },
+      lists: [
+        {
+          kind: "REV",
+          heading: "Future improvements",
+          items: [
+            "Per-customer pricing through a separate rating layer (location, risk profile) instead of one fixed base premium per product",
+            "Move product and cover types from enums into their own tables",
+          ],
+        },
+      ],
+      results: [
+        { value: "9", label: "REST endpoints" },
+        { value: "45", label: "Automated tests" },
+        { value: "3", label: "Backend layers" },
+        { value: "2", label: "Bugs found & fixed" },
+      ],
+      stack: [
+        { group: "Backend", items: ["Java 21", "Spring Boot 4.1", "Spring Data JPA", "Bean Validation", "H2", "Lombok"] },
+        { group: "Frontend", items: ["React 19", "TypeScript", "React Router 7", "axios", "Bootstrap 5", "Vite"] },
+        { group: "Testing", items: ["JUnit", "Controller tests", "Service tests", "Integration tests"] },
+      ],
+    },
   },
 ];
 

@@ -18,17 +18,30 @@ import {
  * A project laid out as one engineering drawing. Sections are lettered in the
  * order they appear (A, B, C…), and each project only renders the blocks it has.
  */
+function ToCome({ note }: { note: string }) {
+  return (
+    <p className="m-0 max-w-[760px] border-[1.5px] border-dashed border-ink/60 px-5 py-6 font-mono text-[13px] tracking-[0.08em] text-ink-muted">
+      [ TO COME — {note.toUpperCase()} ]
+    </p>
+  );
+}
+
 export function CaseStudySheet({ project }: { project: Project }) {
   const cs = project.caseStudy;
   const sections: { kind: string; heading: string; body: ReactNode }[] = [];
   if (cs) {
     sections.push({ kind: "SECTION", heading: "Overview", body: <><h3 className="m-0 max-w-[760px] text-2xl leading-tight font-semibold">{cs.overview.heading}</h3><Paragraphs items={cs.overview.paragraphs} /></> });
+    const pending = (at: "context" | "results") =>
+      cs.pending?.filter((p) => p.at === at).forEach((p) => sections.push({ kind: "DETAIL", heading: p.heading, body: <ToCome note={p.note} /> }));
     if (cs.context) sections.push({ kind: "DETAIL", heading: cs.context.heading, body: <ContextPlates points={cs.context.points} /> });
+    pending("context");
     cs.galleries?.forEach((g) => sections.push({ kind: "VIEW", heading: g.heading, body: <ScreenshotGallery slug={project.slug} gallery={g} /> }));
+    cs.lists?.filter((l) => l.early).forEach((l) => sections.push({ kind: l.kind, heading: l.heading, body: <NumberedList items={l.items} /> }));
     if (cs.architecture) sections.push({ kind: "SCHEMATIC", heading: cs.architecture.heading, body: <Architecture {...cs.architecture} /> });
     sections.push({ kind: "NOTES", heading: cs.decisions.heading, body: <DecisionCards items={cs.decisions.items} /> });
-    cs.lists?.forEach((l) => sections.push({ kind: l.kind, heading: l.heading, body: <NumberedList items={l.items} /> }));
+    cs.lists?.filter((l) => !l.early).forEach((l) => sections.push({ kind: l.kind, heading: l.heading, body: <NumberedList items={l.items} /> }));
     if (cs.results) sections.push({ kind: "TABLE", heading: "Results", body: <StatsRow stats={cs.results} /> });
+    pending("results");
     sections.push({ kind: "BOM", heading: "Tech stack", body: <StackTable stack={cs.stack} /> });
   }
 
