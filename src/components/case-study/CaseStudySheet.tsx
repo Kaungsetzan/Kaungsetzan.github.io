@@ -72,8 +72,8 @@ export function CaseStudySheet({ project }: { project: Project }) {
           <Link href="/#work" className="border-[1.5px] border-ink px-3 py-2 no-underline hover:border-accent hover:text-accent">
             ← BACK TO DRAWER
           </Link>
-          <span className="text-accent">
-            DWG KSZ-0{project.partNo}-A · PART NO. {project.partNo}
+          <span>
+            <span className="font-semibold tracking-[0.14em] text-accent">KSZ</span> DWG-0{project.partNo}-A · PART NO. {project.partNo}
             {project.assembly ? ` · ${project.assembly}` : ""}
             {cs?.period ? ` · ${cs.period}` : ""}
           </span>
