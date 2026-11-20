@@ -21,9 +21,6 @@ export function Hero() {
         </div>
         <p className="sr-only">Full-stack developer: frontend, backend and mobile.</p>
         <p className="m-0 max-w-[540px] text-[clamp(19px,2.4vw,22px)] leading-[1.4]">{profile.pitch}</p>
-        <p className="m-0 max-w-[540px] font-mono text-xs leading-relaxed tracking-[0.08em] text-ink-muted">
-          <span className="text-accent">OPEN TO →</span> {profile.lookingFor.toUpperCase()}
-        </p>
         <div className="mt-2 flex flex-wrap gap-3.5 font-mono text-sm tracking-[0.08em]">
           <a href="#work" className="bg-ink px-[22px] py-3.5 font-semibold text-paper no-underline hover:bg-accent">
             VIEW WORK →

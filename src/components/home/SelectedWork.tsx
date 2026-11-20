@@ -13,7 +13,7 @@ export function SelectedWork() {
   const [featured, ...others] = projects;
   return (
     <section id="work" aria-labelledby="work-title" className="flex scroll-mt-4 flex-col gap-7 px-5 pt-16 pb-8 sm:px-8">
-      <SectionHeader id="work-title" label="SECTION A–A" title="Selected work" />
+      <SectionHeader id="work-title" title="Selected work" />
       <div className="flex flex-wrap gap-6">
         <ProjectCard
           project={featured}

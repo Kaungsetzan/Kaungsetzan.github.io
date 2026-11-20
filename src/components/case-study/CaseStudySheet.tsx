@@ -13,7 +13,7 @@ import {
   StackTable,
   StatsRow,
 } from "./blocks";
-import { OverviewDrawing } from "./OverviewDrawing";
+import { DrawnCallouts } from "@/components/blueprint/DrawnCallouts";
 
 /**
  * A project laid out as one engineering drawing. Sections are lettered in the
@@ -40,7 +40,11 @@ export function CaseStudySheet({ project }: { project: Project }) {
             <h3 className="m-0 max-w-[760px] text-2xl leading-tight font-semibold">{cs.overview.heading}</h3>
             <Paragraphs items={cs.overview.paragraphs} />
           </div>
-          <OverviewDrawing project={project} />
+          <DrawnCallouts
+            caption={`DETAIL ${project.partNo} · KEY FACTS`}
+            aside="SCALE 1:1"
+            items={project.callouts.map((c, i) => ({ marker: String(i + 1).padStart(2, "0"), label: c.label, value: c.value }))}
+          />
         </div>
       ),
     });

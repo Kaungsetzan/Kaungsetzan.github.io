@@ -5,7 +5,7 @@ import { skills } from "@/data/profile";
 export function Skills() {
   return (
     <section id="skills" aria-labelledby="skills-title" className="flex scroll-mt-4 flex-col gap-7 px-5 py-12 sm:px-8">
-      <SectionHeader id="skills-title" label="DETAIL B — BILL OF MATERIALS" title="Skills" />
+      <SectionHeader id="skills-title" title="Skills" />
       <table className="w-full border-collapse font-mono text-sm">
         <thead>
           <tr className="text-left text-xs tracking-[0.12em] text-ink-muted">

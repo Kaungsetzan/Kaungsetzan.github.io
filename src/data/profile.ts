@@ -14,10 +14,21 @@ export const profile = {
 
 /** "Revision history" in the About section, oldest first. */
 export const revisions = [
-  { rev: "A", text: "Mechanical engineering background" },
-  { rev: "B", text: "Eight months of work experience in Singapore" },
-  { rev: "C", text: "B.Sc. Web Development, SRH University of Applied Sciences Heidelberg, Campus Berlin (2024–2028)" },
-  { rev: "D", text: "Shipped 5A Goldsmith solo — live on the App Store and Google Play" },
+  { rev: "A", when: "2016–2019", text: "Higher National Diploma in Mechanical Engineering", detail: "Victoria University College" },
+  {
+    rev: "B",
+    when: "2022–2023",
+    text: "Test engineer — SEGEN Construction Pte. Ltd., Singapore",
+    detail: "Protocol compliance tests for 5G NR on a Nokia 5G project, and drive tests to measure network performance in the field.",
+  },
+  { rev: "C", when: "2024–2028", text: "B.Sc. Web Development", detail: "SRH University of Applied Sciences Heidelberg, Campus Berlin" },
+  { rev: "D", when: "2025–2026", text: "Shipped 5A Goldsmith solo", detail: "Live on the App Store and Google Play" },
+] as const;
+
+export const languages = [
+  { name: "English", level: "Upper intermediate" },
+  { name: "German", level: "A2, currently learning" },
+  { name: "Burmese", level: "Native" },
 ] as const;
 
 /** Grouped skills, shown as a bill of materials. No bars or percentages. */
