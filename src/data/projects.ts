@@ -258,31 +258,40 @@ export const projects: Project[] = [
     slug: "srh-ambassadors",
     partNo: "02",
     title: "SRH Ambassadors",
-    cardLine: "Club management system for my university's student ambassadors, with voting, approvals and role-based access.",
+    cardLine: "Content management system for SRH's student clubs: students request and vote on clubs, ambassadors approve them.",
     oneLiner:
-      "A management system for my university's student ambassador club, with pages and actions limited by role.",
+      "A content management system for SRH's student clubs, built as a summer-semester exam project for a university competition.",
     tags: ["Next.js 16", "TypeScript", "Tailwind CSS", "Strapi 5"],
     callouts: [
+      { label: "CONTEXT", value: "University competition · semester exam" },
+      { label: "MY PART", value: "Responsible for the solution" },
       { label: "ROLES", value: "Student · Ambassador" },
-      { label: "ACCESS", value: "Pages and actions limited by role" },
-      { label: "FLOWS", value: "Propose → vote → approve" },
-      { label: "AUTH", value: "JWT in httpOnly cookies" },
+      { label: "FLOW", value: "Request → 10 votes → approve" },
       { label: "STACK", value: "Next.js 16 · Strapi 5" },
     ],
     repo: "https://github.com/Kaungsetzan/srh-clubs",
     caseStudy: {
       facts: [
-        { label: "WHAT", value: "Web app for a university's student ambassador club" },
+        { label: "WHAT", value: "Content management system for SRH's student clubs" },
         { label: "ROLES", value: "Student · Ambassador" },
-        { label: "MY ROLE", value: "[ to be confirmed ]" },
-        { label: "TIMELINE", value: "[ to be confirmed ]" },
+        { label: "MY ROLE", value: "Team project — responsible for the solution" },
+        { label: "TIMELINE", value: "Summer semester 2026 · exam project" },
         { label: "SOURCE", value: "Public repository on GitHub" },
       ],
       overview: {
         heading: "Students propose clubs, ambassadors decide",
         paragraphs: [
-          "A university web app where students propose and vote on clubs, and SRH ambassadors approve them. It also shows university events, news and projects.",
+          "SRH ran a competition to build a content management system for its student clubs. Students request a club, other students vote for it, and once it reaches 10 votes an SRH ambassador can approve it. The system also shows university events, news and projects.",
           "It's two separate apps: a Next.js frontend and a Strapi 5 headless CMS as the backend. The frontend talks to Strapi through its REST API.",
+        ],
+      },
+      context: {
+        heading: "A semester project for a university competition",
+        points: [
+          { title: "The brief", body: "Build a content management system that SRH ambassadors can use to review and approve the clubs students ask for." },
+          { title: "The team", body: "The project had four parts — introduction, structure, solution and reflection — split across the team." },
+          { title: "My part", body: "I was responsible for the solution: the part of the project that shows how the system works, from requesting a club to approving it." },
+          { title: "The exam", body: "A full-semester exam project in summer 2026. We presented it together as a team. It was built for the exam, not for production use." },
         ],
       },
       galleries: [
@@ -356,11 +365,7 @@ export const projects: Project[] = [
         { group: "Backend", items: ["Strapi 5", "Node.js", "REST API", "SQLite (dev)"] },
         { group: "Auth", items: ["JWT", "httpOnly cookies", "Role-based access"] },
       ],
-      pending: [
-        { at: "context", heading: "Problem and context", note: "What the club needed before this app, and who uses it" },
-        { at: "results", heading: "Results", note: "Usage, feedback or what changed for the club" },
-      ],
-      todo: "My role, timeline, problem/context, results and screenshots still to come.",
+      todo: "Screenshots still to come.",
     },
   },
   {
