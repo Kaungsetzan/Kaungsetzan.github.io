@@ -15,7 +15,6 @@ export function SiteFooter({ dwg = "KSZ-001" }: { dwg?: string }) {
     <footer id="contact" className="flex flex-wrap items-end justify-between gap-6 border-t-[1.5px] border-ink px-5 py-8 sm:px-8">
       <div className="flex flex-col gap-3">
         <h2 className="m-0 text-[clamp(32px,5vw,44px)] leading-none font-semibold uppercase">Let&apos;s build something</h2>
-        <p className="m-0 max-w-md text-lg leading-snug">{profile.lookingFor}.</p>
         <div className="flex flex-wrap gap-5 font-mono text-sm">
           <a href={`mailto:${profile.email}`} className="hover:text-accent">
             {profile.email}

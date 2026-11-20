@@ -6,7 +6,6 @@ export function Hero() {
   return (
     <section id="top" aria-labelledby="hero-title" className="flex flex-wrap items-center gap-8 px-5 pt-12 pb-8 sm:px-8 sm:pt-16">
       <div className="flex min-w-0 flex-[1_1_460px] flex-col gap-5">
-        <p className="m-0 font-mono text-[13px] tracking-[0.14em] text-accent">FIG. 1 — GENERAL ARRANGEMENT</p>
         <h1 id="hero-title" className="m-0 text-[clamp(56px,9vw,84px)] leading-[0.95] font-bold tracking-[-0.01em] uppercase">
           Kaung
           <br />
@@ -25,7 +24,7 @@ export function Hero() {
           <a href="#work" className="bg-ink px-[22px] py-3.5 font-semibold text-paper no-underline hover:bg-accent">
             VIEW WORK →
           </a>
-          <a href={cvHref} className="border-[1.5px] border-ink px-[22px] py-[13px] no-underline hover:border-accent hover:text-accent">
+          <a href={cvHref} {...(profile.cv ? { target: "_blank", rel: "noopener" } : {})} className="border-[1.5px] border-ink px-[22px] py-[13px] no-underline hover:border-accent hover:text-accent">
             {profile.cv ? "DOWNLOAD CV" : "REQUEST CV"}
           </a>
           <a href="#contact" className="border-[1.5px] border-ink px-[22px] py-[13px] no-underline hover:border-accent hover:text-accent">
