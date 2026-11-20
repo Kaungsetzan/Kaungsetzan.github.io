@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+/* Blueprint palette: one paper colour, one ink colour, one accent. */
+@theme {
+  --color-paper: #123766;
+  --color-paper-deep: #0f2e57;
+  --color-ink: #e6eefa;
+  --color-ink-muted: #c9d7ec;
+  --color-accent: #ffb547;
+
+  --font-sans: var(--font-plex-condensed);
+  --font-mono: var(--font-plex-mono);
+}
+
+html {
+  background-color: var(--color-paper);
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-ink);
+  font-family: var(--font-plex-condensed), "Arial Narrow", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Drafting-paper grid: 24px minor squares inside 120px major squares. */
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(230, 238, 250, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230, 238, 250, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(230, 238, 250, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230, 238, 250, 0.04) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
