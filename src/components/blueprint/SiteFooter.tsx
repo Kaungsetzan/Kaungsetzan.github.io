@@ -1,52 +1,43 @@
-import type { ReactNode } from "react";
 import { profile } from "@/data/profile";
 
-function Cell({ children, label = false, span }: { children: ReactNode; label?: boolean; span?: number }) {
-  return (
-    <td colSpan={span} className={`border-[1.5px] border-ink px-3 py-2 ${label ? "text-ink-muted" : ""}`}>
-      {children}
-    </td>
-  );
-}
+const LINKS = [
+  { label: "EMAIL", value: profile.email, href: `mailto:${profile.email}`, mark: "→", external: false },
+  { label: "LINKEDIN", value: "in/kaung-set-zan", href: profile.linkedin, mark: "↗", external: true },
+  { label: "GITHUB", value: "github.com/Kaungsetzan", href: profile.github, mark: "↗", external: true },
+  ...(profile.cv ? [{ label: "CV", value: "Download PDF", href: profile.cv, mark: "↓", external: true }] : []),
+];
 
-/** Contact plus the drawing's title block, in the bottom-right corner like on a real sheet. */
-export function SiteFooter({ dwg = "KSZ-001" }: { dwg?: string }) {
+/** Contact: a heading on the left, one large row per way to reach me on the right. */
+export function SiteFooter() {
+  const year = new Date().getFullYear();
   return (
-    <footer id="contact" className="flex flex-wrap items-end justify-between gap-6 border-t-[1.5px] border-ink px-5 py-8 sm:px-8">
-      <div className="flex flex-col gap-3">
-        <h2 className="m-0 text-[clamp(32px,5vw,44px)] leading-none font-semibold uppercase">Let&apos;s build something</h2>
-        <div className="flex flex-wrap gap-5 font-mono text-sm">
-          <a href={`mailto:${profile.email}`} className="hover:text-accent">
-            {profile.email}
-          </a>
-          <a href={profile.linkedin} className="hover:text-accent">
-            LINKEDIN
-          </a>
-          <a href={profile.github} className="hover:text-accent">
-            GITHUB
-          </a>
+    <footer id="contact" className="flex flex-col gap-8 border-t-[1.5px] border-ink px-5 pt-10 pb-6 sm:px-8">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:items-end">
+        <div className="flex flex-col gap-3">
+          <h2 className="m-0 text-[clamp(32px,5vw,44px)] leading-none font-semibold uppercase">Let&apos;s build something</h2>
         </div>
+        <ul className="m-0 flex list-none flex-col p-0">
+          {LINKS.map((l) => (
+            <li key={l.label}>
+              <a
+                href={l.href}
+                {...(l.external ? { target: "_blank", rel: "noopener" } : {})}
+                className="contact-row grid grid-cols-[64px_minmax(0,1fr)_auto] items-center gap-3 sm:grid-cols-[88px_minmax(0,1fr)_auto] sm:gap-4 border-t border-ink py-4 no-underline"
+              >
+                <span className="font-mono text-[11px] tracking-[0.14em] text-accent">{l.label}</span>
+                <span className="text-[clamp(17px,2.2vw,21px)] [overflow-wrap:anywhere]">{l.value}</span>
+                <span className="contact-mark font-mono text-lg" aria-hidden="true">
+                  {l.mark}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-      <table className="w-full max-w-[420px] border-collapse font-mono text-xs tracking-[0.06em] sm:w-auto sm:min-w-[360px]">
-        <tbody>
-          <tr>
-            <Cell label>DRAWN BY</Cell>
-            <Cell span={3}>KAUNG SET ZAN ({profile.nickname.toUpperCase()})</Cell>
-          </tr>
-          <tr>
-            <Cell label>LOCATION</Cell>
-            <Cell>BERLIN, DE</Cell>
-            <Cell label>SCALE</Cell>
-            <Cell>1:1</Cell>
-          </tr>
-          <tr>
-            <Cell label>DWG NO.</Cell>
-            <Cell>{dwg}</Cell>
-            <Cell label>SHEET</Cell>
-            <Cell>1 / 1</Cell>
-          </tr>
-        </tbody>
-      </table>
+      <p className="m-0 flex flex-wrap justify-between gap-2 border-t border-ink/40 pt-4 font-mono text-[11px] tracking-[0.12em] text-ink-muted">
+        <span>© {year} KAUNG SET ZAN</span>
+        <span>BERLIN, GERMANY</span>
+      </p>
     </footer>
   );
 }

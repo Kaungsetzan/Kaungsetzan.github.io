@@ -90,6 +90,26 @@
   border-bottom-color: var(--color-accent);
 }
 
+/* ---- footer contact rows ---- */
+.contact-row {
+  color: var(--color-ink);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+li:last-child > .contact-row {
+  border-bottom: 1px solid var(--color-ink);
+}
+.contact-row:hover,
+.contact-row:focus-visible {
+  color: var(--color-accent);
+  background-color: rgba(255, 181, 71, 0.08);
+}
+.contact-row .contact-mark {
+  padding-right: 6px;
+}
+
 /* ---- project cards: plate lights up on hover / keyboard focus (colour only, no motion) ---- */
 .project-card {
   background-color: rgba(18, 55, 102, 0.85);
