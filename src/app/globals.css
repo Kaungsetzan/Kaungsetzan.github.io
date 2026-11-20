@@ -92,6 +92,21 @@
     color 0.22s ease,
     border-color 0.22s ease;
 }
+/* featured card: phone screens fade out halfway, ending on a dashed break line */
+.card-figure {
+  position: relative;
+  margin-bottom: 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed rgba(230, 238, 250, 0.45);
+  transition: border-color 0.22s ease;
+}
+.card-figure > div {
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+}
+.project-card:hover .card-figure,
+.project-card:has(.card-link:focus-visible) .card-figure {
+  border-color: rgba(255, 181, 71, 0.6);
+}
 /* the case-study link stretches over the whole plate */
 .project-card .card-link::after {
   content: "";

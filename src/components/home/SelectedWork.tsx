@@ -15,20 +15,20 @@ export function SelectedWork() {
     <section id="work" aria-labelledby="work-title" className="flex scroll-mt-4 flex-col gap-7 px-5 pt-16 pb-8 sm:px-8">
       <SectionHeader id="work-title" label="SECTION A–A" title="Selected work" />
       <div className="flex flex-wrap gap-6">
-        <ProjectCard project={featured} className="flex-[2_1_560px]">
-          <div className="grid max-w-[560px] grid-cols-3 gap-3 py-2 sm:gap-5">
-            {FEATURED_SHOTS.map((s, i) => (
-              <PhoneFrame
-                key={s.file}
-                src={`/projects/5a-goldsmith/${s.file}-sm.webp`}
-                alt={s.alt}
-                width={300}
-                height={s.h}
-                className={i === 1 ? "sm:-translate-y-3" : ""}
-              />
-            ))}
-          </div>
-        </ProjectCard>
+        <ProjectCard
+          project={featured}
+          className="flex-[2_1_560px]"
+          figure={
+            /* top half of three app screens, cut off by a fade like a broken-out view */
+            <div className="card-figure grid min-h-[clamp(150px,34vw,230px)] max-w-[640px] flex-[1_1_0px] grid-cols-3 grid-rows-[minmax(0,1fr)] gap-3 sm:gap-5">
+              {FEATURED_SHOTS.map((s, i) => (
+                <div key={s.file} className={`overflow-hidden ${i === 1 ? "" : "pt-3 sm:pt-4"}`}>
+                  <PhoneFrame src={`/projects/5a-goldsmith/${s.file}-sm.webp`} alt={s.alt} width={300} height={s.h} />
+                </div>
+              ))}
+            </div>
+          }
+        />
         <div className="flex min-w-0 flex-[1_1_300px] flex-col gap-6">
           {others.map((p) => (
             <ProjectCard key={p.slug} project={p} className="flex-1" />

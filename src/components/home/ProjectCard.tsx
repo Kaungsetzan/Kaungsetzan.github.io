@@ -8,7 +8,18 @@ import type { Project } from "@/data/projects";
  * (the "read case study" link stretches over it). On hover / keyboard focus the
  * plate lights up: accent outline, lighter fill, a soft glow and orange bolts.
  */
-export function ProjectCard({ project, children, className = "" }: { project: Project; children?: ReactNode; className?: string }) {
+export function ProjectCard({
+  project,
+  figure,
+  children,
+  className = "",
+}: {
+  project: Project;
+  /** shown above the part number, like the view on a drawing sheet */
+  figure?: ReactNode;
+  children?: ReactNode;
+  className?: string;
+}) {
   const href = `/projects/${project.slug}/`;
   return (
     <article
@@ -17,6 +28,7 @@ export function ProjectCard({ project, children, className = "" }: { project: Pr
       } ${className}`}
     >
       <CornerBolts />
+      {figure}
       <p className="m-0 font-mono text-xs tracking-[0.12em] text-accent">
         PART NO. {project.partNo}
         {project.assembly ? ` · ${project.assembly}` : ""}
