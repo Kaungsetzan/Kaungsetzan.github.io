@@ -1,6 +1,12 @@
 import Image from "next/image";
 
-/** A phone drawn as a line frame, holding a real screenshot. */
+/**
+ * An iPhone 17 Pro drawn around a full-screen simulator screenshot.
+ * The screenshot already contains the status bar and the Dynamic Island, so the
+ * frame only adds the body: titanium band, thin black bezel, rounded screen and
+ * the side buttons (action, volume ×2 on the left; side button and Camera Control
+ * on the right). Everything is sized in container units, so it scales with width.
+ */
 export function PhoneFrame({ src, alt, width, height, priority = false, className = "" }: {
   src: string;
   alt: string;
@@ -10,17 +16,25 @@ export function PhoneFrame({ src, alt, width, height, priority = false, classNam
   className?: string;
 }) {
   return (
-    <div className={`relative rounded-[22px] border-[1.5px] border-ink bg-paper p-[5px] ${className}`}>
-      <span aria-hidden="true" className="absolute top-[9px] left-1/2 z-[1] h-[5px] w-[30%] -translate-x-1/2 rounded-full border border-ink bg-paper" />
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        priority={priority}
-        className="block h-auto w-full rounded-[17px]"
-        sizes="(max-width: 600px) 30vw, 180px"
-      />
+    <div className={`iphone ${className}`}>
+      <span className="iphone-btn left-0 top-[17%] h-[4.2%]" aria-hidden="true" />
+      <span className="iphone-btn left-0 top-[25%] h-[7.5%]" aria-hidden="true" />
+      <span className="iphone-btn left-0 top-[34.5%] h-[7.5%]" aria-hidden="true" />
+      <span className="iphone-btn right-0 top-[27%] h-[11%]" aria-hidden="true" />
+      <span className="iphone-btn iphone-cam right-0 top-[56%] h-[6.5%]" aria-hidden="true" />
+      <div className="iphone-body">
+        <div className="iphone-bezel">
+          <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            priority={priority}
+            className="iphone-screen"
+            sizes="(max-width: 600px) 30vw, 200px"
+          />
+        </div>
+      </div>
     </div>
   );
 }

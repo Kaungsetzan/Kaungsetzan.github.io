@@ -76,6 +76,43 @@
   fill: #ffc56e;
 }
 
+/* ---- iPhone 17 Pro frame (sizes in % of the phone's width via cqw) ---- */
+.iphone {
+  position: relative;
+  container-type: inline-size;
+  padding-inline: 1.1%;
+}
+.iphone-body {
+  position: relative;
+  border-radius: 17cqw;
+  padding: 1.15cqw;
+  /* titanium band */
+  background: linear-gradient(135deg, #b9c0ca 0%, #6f7784 22%, #a7aeb9 50%, #5f6773 78%, #aab1bb 100%);
+  box-shadow:
+    0 0 0 1px rgba(230, 238, 250, 0.55),
+    0 10px 24px rgba(4, 16, 38, 0.45);
+}
+.iphone-bezel {
+  border-radius: 15.9cqw;
+  padding: 2.4cqw;
+  background: #050608;
+}
+.iphone-screen {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 13.6cqw;
+}
+.iphone-btn {
+  position: absolute;
+  width: 1.5cqw;
+  border-radius: 1cqw;
+  background: linear-gradient(90deg, #5f6773, #b3bac4 50%, #5f6773);
+}
+.iphone-cam {
+  background: linear-gradient(90deg, #3c424c, #7d8591 50%, #3c424c);
+}
+
 /* ---- header navigation: plain text, underline + orange on hover / keyboard focus ---- */
 .nav-btn {
   color: var(--color-ink);
