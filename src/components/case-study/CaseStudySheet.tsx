@@ -13,6 +13,7 @@ import {
   StackTable,
   StatsRow,
 } from "./blocks";
+import { OverviewDrawing } from "./OverviewDrawing";
 
 /**
  * A project laid out as one engineering drawing. Sections are lettered in the
@@ -30,7 +31,19 @@ export function CaseStudySheet({ project }: { project: Project }) {
   const cs = project.caseStudy;
   const sections: { kind: string; heading: string; body: ReactNode }[] = [];
   if (cs) {
-    sections.push({ kind: "SECTION", heading: "Overview", body: <><h3 className="m-0 max-w-[760px] text-2xl leading-tight font-semibold">{cs.overview.heading}</h3><Paragraphs items={cs.overview.paragraphs} /></> });
+    sections.push({
+      kind: "SECTION",
+      heading: "Overview",
+      body: (
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] lg:gap-10">
+          <div className="flex flex-col gap-5">
+            <h3 className="m-0 max-w-[760px] text-2xl leading-tight font-semibold">{cs.overview.heading}</h3>
+            <Paragraphs items={cs.overview.paragraphs} />
+          </div>
+          <OverviewDrawing project={project} />
+        </div>
+      ),
+    });
     const pending = (at: "context" | "results") =>
       cs.pending?.filter((p) => p.at === at).forEach((p) => sections.push({ kind: "DETAIL", heading: p.heading, body: <ToCome note={p.note} /> }));
     if (cs.context) sections.push({ kind: "DETAIL", heading: cs.context.heading, body: <ContextPlates points={cs.context.points} /> });

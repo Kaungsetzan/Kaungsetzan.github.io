@@ -77,6 +77,7 @@ function BrowserFrame({ src, alt, width, height, href }: { src: string; alt: str
 export function ScreenshotGallery({ slug, title, gallery }: { slug: string; title: string; gallery: Gallery }) {
   const base = `/projects/${slug}`;
   const phone = gallery.device === "phone";
+  if (gallery.privateNote) return <PrivateScreens note={gallery.privateNote} />;
   return (
     <ul
       className={`m-0 grid list-none gap-x-5 gap-y-7 p-0 ${
@@ -104,6 +105,32 @@ export function ScreenshotGallery({ slug, title, gallery }: { slug: string; titl
         </li>
       ))}
     </ul>
+  );
+}
+
+/** Stands in for screens that can't be shown because they hold a client's private data. */
+function PrivateScreens({ note }: { note: NonNullable<Gallery["privateNote"]> }) {
+  return (
+    <div className="flex max-w-[860px] flex-col gap-4 border-[1.5px] border-dashed border-ink/60 px-6 py-6">
+      <p className="m-0 flex items-center gap-3 font-mono text-[13px] tracking-[0.12em] text-accent">
+        <svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true" className="flex-none">
+          <rect x="1" y="7" width="12" height="8" fill="none" stroke="currentColor" strokeWidth="1.4" />
+          <path d="M3.5 7V4.5a3.5 3.5 0 0 1 7 0V7" fill="none" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+        [ PRIVATE DATA — NOT SHOWN ]
+      </p>
+      <p className="m-0 max-w-[700px] text-[18px] leading-normal">{note.reason}</p>
+      <div className="flex flex-col gap-2">
+        <span className="font-mono text-[11px] tracking-[0.12em] text-ink-muted">SCREENS BUILT</span>
+        <ul className="m-0 flex list-none flex-wrap gap-2 p-0 font-mono text-xs">
+          {note.covers.map((c) => (
+            <li key={c} className="border border-ink/70 px-2 py-1 uppercase">
+              {c}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 

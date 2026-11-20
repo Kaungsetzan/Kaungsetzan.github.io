@@ -26,6 +26,8 @@ export interface Gallery {
   heading: string;
   device: "phone" | "browser";
   shots: Shot[];
+  /** screens are deliberately not shown (e.g. a client's private data): explain why and list what they cover */
+  privateNote?: { reason: string; covers: string[] };
 }
 
 export interface ArchNode {
@@ -147,16 +149,20 @@ export const projects: Project[] = [
         {
           heading: "Admin dashboard — React 19, React Router 7, on Vercel",
           device: "browser",
-          shots: [
-            { file: "dashboard-overview", caption: "Dashboard overview", width: 1600, height: 928 },
-            { file: "order-management", caption: "Order management", width: 1600, height: 926 },
-            { file: "customer-messaging", caption: "Customer messaging", width: 1600, height: 927 },
-            { file: "customer-management", caption: "Customer management", width: 1600, height: 924 },
-            { file: "product-catalogue", caption: "Product catalogue", width: 1600, height: 926 },
-            { file: "home-screen-highlights", caption: "Home-screen highlights", width: 1600, height: 926 },
-            { file: "favourites-analytics", caption: "Favourites analytics", width: 1600, height: 927 },
-            { caption: "Sales report", placeholder: true },
-          ],
+          shots: [],
+          privateNote: {
+            reason: "Screenshots aren't shown: the admin dashboard displays the client's private business data — customers, orders and sales.",
+            covers: [
+              "Dashboard overview",
+              "Order management",
+              "Customer messaging",
+              "Customer management",
+              "Product catalogue",
+              "Home-screen highlights",
+              "Favourites analytics",
+              "Sales report",
+            ],
+          },
         },
       ],
       architecture: {
@@ -246,7 +252,6 @@ export const projects: Project[] = [
         { group: "Backend", items: ["Supabase", "PostgreSQL", "Deno Edge Functions", "Supabase Auth", "Supabase Storage", "Supabase Realtime"] },
         { group: "Security", items: ["bcrypt (admin auth)", "HMAC tokens", "Row Level Security", "Rate limiting", "Server-side checkout"] },
       ],
-      todo: "Sales report screenshot still to come.",
     },
   },
   {
