@@ -13,6 +13,24 @@ case studies laid out like engineering drawings.
 - IBM Plex Sans Condensed + IBM Plex Mono, bundled locally (SIL Open Font License)
 - Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`
 
+## Structure
+
+```
+src/
+  app/                    routes, metadata, sitemap, robots, fonts, preview image
+  data/projects.ts        all project + case-study content (typed)
+  data/profile.ts         name, links, skills, revision history
+  lib/gears.ts            gear and rack outlines (tooth geometry)
+  lib/mechanism.ts        hero mechanism geometry: gear timing, crank, cam, ratchet pawl
+  components/mechanism/   the interactive hero drawing
+  components/rail/        desktop scroll rail (rack-and-roller scrollbar + lever)
+  components/home/        hero, project cards (tracing overlay, drawer pull), skills, about
+  components/case-study/  one template that renders every /projects/<slug>/ page
+```
+
+Adding a project = adding an entry to `src/data/projects.ts` (+ screenshots in
+`public/projects/<slug>/` as `<name>.webp` and `<name>-sm.webp`).
+
 ## Develop
 
 ```bash

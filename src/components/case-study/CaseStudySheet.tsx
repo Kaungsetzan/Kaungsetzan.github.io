@@ -35,7 +35,7 @@ export function CaseStudySheet({ project }: { project: Project }) {
       cs.pending?.filter((p) => p.at === at).forEach((p) => sections.push({ kind: "DETAIL", heading: p.heading, body: <ToCome note={p.note} /> }));
     if (cs.context) sections.push({ kind: "DETAIL", heading: cs.context.heading, body: <ContextPlates points={cs.context.points} /> });
     pending("context");
-    cs.galleries?.forEach((g) => sections.push({ kind: "VIEW", heading: g.heading, body: <ScreenshotGallery slug={project.slug} gallery={g} /> }));
+    cs.galleries?.forEach((g) => sections.push({ kind: "VIEW", heading: g.heading, body: <ScreenshotGallery slug={project.slug} title={project.title} gallery={g} /> }));
     cs.lists?.filter((l) => l.early).forEach((l) => sections.push({ kind: l.kind, heading: l.heading, body: <NumberedList items={l.items} /> }));
     if (cs.architecture) sections.push({ kind: "SCHEMATIC", heading: cs.architecture.heading, body: <Architecture {...cs.architecture} /> });
     sections.push({ kind: "NOTES", heading: cs.decisions.heading, body: <DecisionCards items={cs.decisions.items} /> });

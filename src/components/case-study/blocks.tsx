@@ -74,7 +74,7 @@ function BrowserFrame({ src, alt, width, height, href }: { src: string; alt: str
   );
 }
 
-export function ScreenshotGallery({ slug, gallery }: { slug: string; gallery: Gallery }) {
+export function ScreenshotGallery({ slug, title, gallery }: { slug: string; title: string; gallery: Gallery }) {
   const base = `/projects/${slug}`;
   const phone = gallery.device === "phone";
   return (
@@ -89,12 +89,12 @@ export function ScreenshotGallery({ slug, gallery }: { slug: string; gallery: Ga
             {shot.placeholder || !shot.file ? (
               <Placeholder shot={shot} device={gallery.device} />
             ) : phone ? (
-              <PhoneFrame src={`${base}/${shot.file}.webp`} alt={shot.alt ?? shot.caption} width={shot.width!} height={shot.height!} />
+              <PhoneFrame src={`${base}/${shot.file}.webp`} alt={shot.alt ?? `${title} ${phone ? "app" : "admin"} screen: ${shot.caption.toLowerCase()}`} width={shot.width!} height={shot.height!} />
             ) : (
               <BrowserFrame
                 src={`${base}/${shot.file}-sm.webp`}
                 href={`${base}/${shot.file}.webp`}
-                alt={shot.alt ?? shot.caption}
+                alt={shot.alt ?? `${title} admin screen: ${shot.caption.toLowerCase()}`}
                 width={800}
                 height={Math.round((shot.height! * 800) / shot.width!)}
               />
