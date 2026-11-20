@@ -4,7 +4,7 @@ export const profile = {
   location: "Berlin, Germany",
   pitch:
     "Full-stack developer with a mechanical engineering background. I build web and mobile products from the database up — React, Next.js, Node.js, NestJS, PostgreSQL and Supabase.",
-  lookingFor: "Internships and working-student (Werkstudent) roles in Germany · remote work for teams in Singapore or Australia",
+  lookingFor: "Internships and working-student (Werkstudent) roles in Germany",
   email: "kaungsetzan.work@gmail.com",
   linkedin: "https://www.linkedin.com/in/kaung-set-zan-61b911413/",
   github: "https://github.com/Kaungsetzan",

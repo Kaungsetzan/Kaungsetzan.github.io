@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const NAV = [
-  { href: "/#work", label: "01 / WORK" },
-  { href: "/#skills", label: "02 / SKILLS" },
-  { href: "/#about", label: "03 / ABOUT" },
-  { href: "/#contact", label: "04 / CONTACT" },
+  { href: "/#work", label: "WORK" },
+  { href: "/#skills", label: "SKILLS" },
+  { href: "/#about", label: "ABOUT" },
+  { href: "/#contact", label: "CONTACT" },
 ];
 
 export function SiteHeader({ sheet = "DWG-001 · PORTFOLIO" }: { sheet?: string }) {
@@ -14,9 +14,13 @@ export function SiteHeader({ sheet = "DWG-001 · PORTFOLIO" }: { sheet?: string 
         <span className="border-[1.5px] border-ink px-2 py-1 font-semibold">KSZ</span>
         <span>{sheet}</span>
       </Link>
-      <nav aria-label="Main" className="flex flex-wrap gap-x-7 gap-y-2">
+      <nav aria-label="Main" className="flex flex-wrap gap-2 sm:gap-3">
         {NAV.map((n) => (
-          <Link key={n.href} href={n.href} className="no-underline hover:text-accent">
+          <Link
+            key={n.href}
+            href={n.href}
+            className="nav-btn px-3 py-2 text-[13px] font-semibold tracking-[0.12em] no-underline sm:px-4 sm:text-[15px]"
+          >
             {n.label}
           </Link>
         ))}

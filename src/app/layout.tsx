@@ -53,7 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#main" className="sr-only z-50 bg-ink px-4 py-2 font-mono text-paper focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
           Skip to content
         </a>
-        <div className="relative min-h-screen overflow-hidden p-3 sm:p-6 min-[601px]:pr-[100px]">
+        <div className="relative min-h-screen overflow-hidden p-3 sm:py-6 sm:pl-6 min-[601px]:pr-[100px]">
           <BlueprintBackground />
           <div className="relative z-[1] mx-auto max-w-[1240px] border-[1.5px] border-ink outline outline-1 outline-offset-[6px] outline-[rgba(230,238,250,0.45)]">
             <SiteHeader />
